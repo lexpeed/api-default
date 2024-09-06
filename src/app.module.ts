@@ -5,6 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import envConfig from './configs/env.config';
 import mongoConfig from './configs/mongo.config';
 import { HealthModule } from './modules/health/health.module';
+import { QuestionsModule } from './modules/questions/questions.module';
+import { ActivityModule } from './modules/activity/activity.module';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { HealthModule } from './modules/health/health.module';
       global: true,
     },
     HealthModule,
+    QuestionsModule,
+    ActivityModule,
   ],
 })
 export class AppModule {}
