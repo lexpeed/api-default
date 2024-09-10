@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 
 import { ActivityService } from './activity.service';
 
@@ -6,15 +6,14 @@ import { ActivityService } from './activity.service';
 export class ActivityController {
   constructor(private readonly activityService: ActivityService) {}
 
-  @Post()
-  async create(@Body() data: any, @Req() req: any): Promise<any> {
-    try {
-      const dataCreated = await this.activityService.create(data);
-      req.logger.log(`Activity id: ${dataCreated.id} created`);
-      return dataCreated;
-    } catch (error) {
-      req.logger.error(error);
-      throw error;
-    }
+  @Get()
+  async findAll(@Query() filterPaginateDto: any): Promise<any> {
+    const { search } = filterPaginateDto;
+
+    const resultQuery = await this.activityService.findAll({
+      search,
+    });
+
+    return { data: resultQuery };
   }
 }
