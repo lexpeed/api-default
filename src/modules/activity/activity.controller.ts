@@ -14,6 +14,6 @@ export class ActivityController {
       search,
     });
 
-    return { data: resultQuery };
+    return resultQuery;
   }
 }
