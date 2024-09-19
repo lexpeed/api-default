@@ -15,6 +15,9 @@ export class ActivityEntity extends Document {
   @Prop({ type: String, required: true })
   content: string;
 
+  @Prop({ type: String, required: true })
+  htmlContent: string;
+
   @Prop({ type: Array, required: true })
   questions: any[];
 

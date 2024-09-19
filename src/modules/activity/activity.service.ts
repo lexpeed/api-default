@@ -1,4 +1,4 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable, NotFoundException, Scope } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -23,5 +23,15 @@ export class ActivityService {
     const result = await this.ActivityModel.find(filter).limit(12).lean();
 
     return result;
+  }
+
+  async findOne(id: string): Promise<any> {
+    const data = await this.ActivityModel.findOne({ id }).lean();
+
+    if (!data) {
+      throw new NotFoundException('Question not found.');
+    }
+
+    return data;
   }
 }

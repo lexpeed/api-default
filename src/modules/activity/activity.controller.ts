@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 
 import { ActivityService } from './activity.service';
 
@@ -15,5 +15,10 @@ export class ActivityController {
     });
 
     return resultQuery;
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<any> {
+    return await this.activityService.findOne(id);
   }
 }
